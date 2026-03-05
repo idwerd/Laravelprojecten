@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Blog;
-use App\Models\Category;
+use App\Models\Comment;
 
-class BlogController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
-        return view('blogs.index', compact('blogs'));
+        //
     }
 
     /**
@@ -22,8 +20,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('blogs.create', compact('categories'));
+        //
     }
 
     /**
@@ -31,6 +28,15 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        $comment = new Comment();
+        $comment->body = $request->input('comment');
+        $comment->save();
+        /*
+        $blog = Blog::find($id);
+        return view('blogs.blog', compact('blog'));
+        */
+        return redirect()->route('blogs.blog');
+        /*
         $blog = new Blog();
         $blog->title = $request->input('title');
         $blog->body = $request->input('body');
@@ -38,15 +44,17 @@ class BlogController extends Controller
         $blog->save();
 
         return redirect()->route('blogs.index');
+        */
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(string $id)
     {
-        $blog = Blog::find($id);
+        $comments = Comment::find($id);
         return view('blogs.blog', compact('blog'));
+
     }
 
     /**

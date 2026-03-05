@@ -9,11 +9,10 @@
 
         <section class="blogoverview">
             @foreach($blogs as $blog) 
-                <a class="blogpreview" href="">
+                <a class="blogpreview" href="{{ route('blogs.blog', $blog->id) }}">
                     <h2>{{ $blog->title }}</h2>
                     <h3>{{ $blog->created_at }}</h3>
                 </a>
-               
             @endforeach
         </section>
 
