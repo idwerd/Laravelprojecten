@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Blog;
-use App\Models\Category;
 
-class BlogController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
-        return view('blogs.index', compact('blogs'));
+        //dd($request);
+        $blogs = Blog::where('user_id', '2')->orderBy('created_at', 'desc')->get();
+       // return view('users.dashboard', compact('blogs'));
+        return view('users.dashboard', compact('blogs'));
     }
 
     /**
@@ -22,8 +24,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('blogs.create', compact('categories'));
+        //
     }
 
     /**
@@ -31,25 +32,17 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = new Blog();
-        $blog->title = $request->input('title');
-        $blog->body = $request->input('body');
-        $blog->category_id = $request->input('category_id');
-        $blog->image = $request->input('image');
-        $blog->premium = $request->input('premium');
-        $blog->save();
-
-        return redirect()->route('blogs.index');
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(string $id)
     {
-        $blog = Blog::find($id);
-        $comments = app(CommentController::class)->show($id);
-        return view('blogs.blog', compact('blog', 'comments'));
+        $blogs = Blog::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        dd($blogs);
+        return $blogs;
     }
 
     /**

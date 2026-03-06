@@ -15,9 +15,16 @@ class Blog extends Model
     public function blogs() {
         return $this->hasMany(Blog::class);
     }
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     protected $fillable = [
         'title', 
         'body', 
+        'image',
         'category_id',
+        'user_id',
+        'premium',
     ];
 }

@@ -5,15 +5,13 @@
 @section('content')
 
     <main>
-        <h1>Log in</h1>
-        <form >
+        <h1>Login</h1>
+        <form action="{{ route('users.authenticate') }}" method="POST">
             @csrf
-            <input id="username" name="username" placeholder="Username" type="text"/>
+            <input id="email" name="email" placeholder="E-mail" type="text"/>
             <input id="password" name="password" placeholder="Password" type="password"/>
             <button type="submit">Log in</button>
         </form>
     </main>
     
-    
-
 @endsection

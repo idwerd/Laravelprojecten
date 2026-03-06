@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\Blog;
 
 class CommentController extends Controller
 {
@@ -26,35 +27,24 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, int $id)
     {
         $comment = new Comment();
         $comment->body = $request->input('comment');
+        $comment->blog_id = $id;
         $comment->save();
-        /*
-        $blog = Blog::find($id);
-        return view('blogs.blog', compact('blog'));
-        */
-        return redirect()->route('blogs.blog');
-        /*
-        $blog = new Blog();
-        $blog->title = $request->input('title');
-        $blog->body = $request->input('body');
-        $blog->category_id = $request->input('category_id');
-        $blog->save();
 
-        return redirect()->route('blogs.index');
-        */
+        return redirect()->route('blogs.blog', $id);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        $comments = Comment::find($id);
-        return view('blogs.blog', compact('blog'));
-
+        $comments = Comment::where('blog_id', $id)->orderBy('created_at', 'desc')->get();
+        return $comments;
     }
 
     /**

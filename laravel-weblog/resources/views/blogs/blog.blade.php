@@ -23,11 +23,27 @@
         </section>
         
         <section class="commentsection">
-            <h2>Comments</h2>
+            
             <form action="{{ route('comments.store', $blog->id) }}" method="POST">
+                @csrf
                 <textarea name="comment" id="comment" placeholder="Leave a comment!"></textarea>
                 <button type="submit">Post your comment</button>
             </form>
+
+            <div class="comments">
+                <h2>Comments</h2>
+                @if($comments->isEmpty())
+                    <p>There are no comments yet. Be the first and leave a comment!</p>
+                @else
+                    @foreach($comments as $comment)
+                        <div class="singlecomment">
+                            <p class="username">Username</p>
+                            <p>{{ $comment->body }}</p>
+                            <p class="date">{{ $comment->created_at }}</p>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </section>
         
     </main>
