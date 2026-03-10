@@ -12,10 +12,19 @@
             <div class="metadata">
                 <h3>{{ $blog->created_at }}</h3>
                 
-                <h3>{{ $blog->category->name }}</h3>
+                @foreach($blog->category as $category)
+                    <div>
+                        <h3>{{ $category->name }}</h3>
+                    </div>
+                @endforeach
+                
                 
                 <h3>Author</h3>
             </div>
+
+            @if($blog->image)
+                <img src="">
+            @endif
 
             <div class="blogtext">
                 {{ $blog->body }}

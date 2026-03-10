@@ -21,7 +21,7 @@ class BlogFactory extends Factory
         return [
             'title' => $this->faker->sentence(5),
             'body' => $this->faker->paragraphs(5, true),
-            'category_id' => Category::inRandomOrder()->first()->id,
+            //'category_id' => Category::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
             'premium' => $this->faker->boolean(),
         ];

@@ -9,10 +9,14 @@
 
         <section class="blogoverview">
             @foreach($blogs as $blog) 
-                <a class="blogpreview" href="{{ route('blogs.blog', $blog->id) }}">
-                    <h2>{{ $blog->title }}</h2>
-                    <h3>{{ $blog->created_at }}</h3>
-                </a>
+                @if( $haspremium === false && $blog->premium === 1)
+                    @continue
+                @else
+                    <a class="blogpreview {{ $blog->premium === 1 ? 'premium' : null }}" href="{{ route('blogs.blog', $blog->id) }}">
+                        <h2>{{ $blog->title }}</h2>
+                        <h3>{{ $blog->created_at }}</h3>
+                    </a>
+                @endif
             @endforeach
         </section>
 

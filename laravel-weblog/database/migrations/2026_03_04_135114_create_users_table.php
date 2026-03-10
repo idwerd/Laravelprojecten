@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->char('password');
-            //$table->boolean('premium');
+            $table->boolean('premium');
             $table->timestamps();
         });
     }

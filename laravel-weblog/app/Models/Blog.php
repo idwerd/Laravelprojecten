@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Blog extends Model
 {
     use HasFactory;
 
-    public function category() {
-        return $this->belongsTo(Category::class);
+    public function category(): BelongsToMany {
+        return $this->belongsToMany(Category::class);
     }
     public function blogs() {
         return $this->hasMany(Blog::class);
@@ -23,7 +24,7 @@ class Blog extends Model
         'title', 
         'body', 
         'image',
-        'category_id',
+        //'category_id',
         'user_id',
         'premium',
     ];

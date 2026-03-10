@@ -80,7 +80,6 @@ h3 {
     display: block;
     margin-bottom: 50px;
 }
-
 .blogpreview {
     width: 300px;
     padding: 20px;
@@ -89,14 +88,35 @@ h3 {
     text-align: center;
     background-color: rgba(255, 166, 0, 0.3);
 }
-
-.edit-buttons a {
+.premium {
+    background-color:  rgba(64, 139, 80, 0.3);
+}
+.edit-buttons {
+    display: flex;
+    justify-content: right;
+    border-bottom: 1px solid grey;
+    margin-bottom: 10px;
+}
+.edit-buttons form button, .edit-buttons button {
     text-decoration: underline;
-    background-color: none;
-    justify-self: space-between;
+    background-color: transparent;
+    padding-left: 10px;
+    width: 50%;
+    cursor:pointer;
+    
+}
+.edit-buttons form button:hover {
+    text-decoration: none;
+    background-color: transparent;
 }
 .blogpreview:hover {
     background-color: rgba(255, 166, 0, 0.5);
+}
+.premium:hover {
+    background-color:  rgba(64, 139, 80, 0.5);
+}
+#delete-dialog {
+    background-color: rgb(86, 86, 143);
 }
 .blogtext, .commentsection {
     padding-left: 100px;
@@ -179,6 +199,12 @@ select {
     border-radius: 30px;
     padding: 15px;
     margin-bottom: 20px;
+}
+
+.error {
+    color: rgb(172, 0, 0);
+    text-align: right;
+
 }
 /*BLOGPAGE*/
 .metadata {

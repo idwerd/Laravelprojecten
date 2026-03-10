@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Blog;
 use App\Models\Category;
 
@@ -14,7 +15,18 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::orderBy('created_at', 'desc')->get();
-        return view('blogs.index', compact('blogs'));
+        $user = Auth::user();
+        if($user) {
+            if($user->premium === 1) {
+                $haspremium = true;
+            } else {
+                $haspremium = false;
+            }
+        } else {
+            $haspremium = false;
+        }
+        
+        return view('blogs.index', compact('blogs', 'haspremium'));
     }
 
     /**
@@ -32,12 +44,17 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $blog = new Blog();
+        $blog->user_id =  Auth::id();
         $blog->title = $request->input('title');
         $blog->body = $request->input('body');
-        $blog->category_id = $request->input('category_id');
-        $blog->image = $request->input('image');
+        //$blog->image = $request->input('image');
         $blog->premium = $request->input('premium');
         $blog->save();
+
+        if ($request->has('category_id')) {
+            $blog->category()->attach($request->input('category_id'));
+        }
+    
 
         return redirect()->route('blogs.index');
     }
@@ -48,8 +65,9 @@ class BlogController extends Controller
     public function show(int $id)
     {
         $blog = Blog::find($id);
+        $blog->load('category');
         $comments = app(CommentController::class)->show($id);
-        return view('blogs.blog', compact('blog', 'comments'));
+        return view('blogs.blog', compact('blog', 'comments',));
     }
 
     /**
@@ -57,7 +75,9 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $blog = Blog::find($id);
+        $categories = Category::all();
+        return view('blogs.edit', compact('blog', 'categories'));
     }
 
     /**
@@ -65,7 +85,18 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->title = $request->input('title');
+        $blog->body = $request->input('body');
+        //$blog->image = $request->input('image');
+        $blog->premium = $request->input('premium');
+        $blog->save();
+
+        if ($request->has('category_id')) {
+            $blog->category()->attach($request->input('category_id'));
+        }
+
+        return redirect()->route('blogs.blog', $id);
     }
 
     /**
@@ -73,6 +104,8 @@ class BlogController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $blog = Blog::find($id);
+        $blog->delete();
+        return redirect()->route('users.dashboard');
     }
 }

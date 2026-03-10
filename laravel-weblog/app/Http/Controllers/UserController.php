@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Blog;
 
@@ -13,10 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //dd($request);
-        $blogs = Blog::where('user_id', '2')->orderBy('created_at', 'desc')->get();
-       // return view('users.dashboard', compact('blogs'));
-        return view('users.dashboard', compact('blogs'));
+        $blogs = Blog::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $premium = User::find(Auth::id())->premium;
+        return view('users.dashboard', compact('blogs', 'premium'));
     }
 
     /**
@@ -40,9 +40,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        /*
         $blogs = Blog::where('user_id', $id)->orderBy('created_at', 'desc')->get();
-        dd($blogs);
-        return $blogs;
+        return $blogs;*/
     }
 
     /**

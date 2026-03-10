@@ -11,7 +11,7 @@
             <input id="title" name="title" placeholder="Title"/>
             <input type="file" name="image"/>
             <label>Categories</label>
-            <select name="category_id" id="category_id" multiple required>
+            <select name="category_id[]" id="category_id" multiple required>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach

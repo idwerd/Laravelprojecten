@@ -14,16 +14,15 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        
-        //dd(Auth::attempt($credentials));
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('users.dashboard');
         }
-
+        
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'The provided email is incorrect.',
+            'password' => 'The provided password is incorrect.',
         ])->onlyInput('email');
     }
 
