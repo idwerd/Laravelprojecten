@@ -9,7 +9,6 @@
         
         <label>Filter</label>
         <select name="category_id[]" class="filter-categories" multiple>
-    
             @foreach($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
