@@ -15,10 +15,18 @@ class UserController extends Controller
     public function index()
     {
         $blogs = Blog::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
-        $premium = User::find(Auth::id())->premium;
-        return view('users.dashboard', compact('blogs', 'premium'));
+        $user = User::find(Auth::id());
+        return view('users.dashboard', compact('blogs', 'user'));
     }
 
+    public function premium() 
+    {
+        $user = User::find(Auth::id());
+        $premium = $user->premium === 1 ? 0 : 1;
+        $user->update(['premium' => $premium]);
+        
+        return redirect()->route('users.dashboard');
+    }
     /**
      * Show the form for creating a new resource.
      */

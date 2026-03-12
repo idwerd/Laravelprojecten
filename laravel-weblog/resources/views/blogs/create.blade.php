@@ -5,7 +5,11 @@
 @section('content')
 
     <main>
+
+        @include('partials.goback')
+
         <h1>Create new blog</h1>
+
         <form action="{{ route('blogs.store') }}" method="POST">
             @csrf
             <input id="title" name="title" placeholder="Title"/>

@@ -2,7 +2,13 @@
     <ul>
         <div class="mainmenu">
             <li><a href="{{ route('blogs.index') }}">Blogs overview</a></li>
-            
+
+            @auth
+                @if(Auth::user()->premium)
+                    <li><a href="{{ route('blogs.premium') }}">Premium content</a></li>  
+                @endif
+            @endauth
+                      
         </div>
        <div class="users">
 

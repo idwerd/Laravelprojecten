@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Blog;
 
 class CommentController extends Controller
@@ -32,6 +33,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->body = $request->input('comment');
         $comment->blog_id = $id;
+        $comment->user_id = Auth::user()->id;
         $comment->save();
 
         return redirect()->route('blogs.blog', $id);

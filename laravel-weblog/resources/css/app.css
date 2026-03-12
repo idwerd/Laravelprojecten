@@ -38,6 +38,13 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+.categories ul {
+    list-style-type: disc;
+}
+.categories li {
+    display: list-item;
+}
+
 .mainmenu {
     text-align: left;
     display: inline;
@@ -96,8 +103,9 @@ h3 {
     justify-content: right;
     border-bottom: 1px solid grey;
     margin-bottom: 10px;
+    padding-bottom: 10px;
 }
-.edit-buttons form button, .edit-buttons button {
+.edit-buttons a, .delete-btn {
     text-decoration: underline;
     background-color: transparent;
     padding-left: 10px;
@@ -105,7 +113,7 @@ h3 {
     cursor:pointer;
     
 }
-.edit-buttons form button:hover {
+.edit-buttons a:hover, .delete-btn:hover {
     text-decoration: none;
     background-color: transparent;
 }
@@ -206,6 +214,52 @@ select {
     text-align: right;
 
 }
+
+.dialog {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.205);
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+.delete {
+    background-color: rgb(250, 239, 210);
+    width: 500px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    top: 40%;
+    border-radius: 30px;
+}
+.delete h2 {
+    margin-bottom: 10px;
+}
+.dialog:target {
+    display: block;
+}
+
+.confirm-buttons {
+    display: grid;
+    grid-template-columns: 34% 33% 33%;
+    margin-top: 20px;
+}
+.confirm-buttons a {
+    grid-column: 3/4;
+    width: 100%;
+}
+.confirm-buttons form {
+    width: 150px;
+    grid-column: 2/3;
+}
+.confirm-buttons form button {
+    margin-right: 0px;;
+}
+
 /*BLOGPAGE*/
 .metadata {
     display: flex;
@@ -215,3 +269,22 @@ select {
     margin-bottom: 50px;
 }
 
+.subscription {
+    margin-bottom: 50px;
+}
+.subscription form, .premium-btn, .downgrade-premium {
+    margin-left: 0px;
+}
+.premium-btn {
+    margin-top: 20px;
+}
+.downgrade-premium {
+    width: auto;
+    padding-left: 0px;
+    background-color: transparent;
+    text-decoration: underline;
+}
+.downgrade-premium:hover {
+    background-color: transparent;
+    text-decoration: none;
+}

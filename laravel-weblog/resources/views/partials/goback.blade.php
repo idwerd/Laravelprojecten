@@ -1,0 +1,1 @@
+<a href="{{ URL::previous() }}">&#8592; Back</a>

@@ -15,20 +15,30 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $categories = Category::all();
         $user = Auth::user();
-        if($user) {
-            if($user->premium === 1) {
-                $haspremium = true;
-            } else {
-                $haspremium = false;
-            }
-        } else {
-            $haspremium = false;
-        }
-        
-        return view('blogs.index', compact('blogs', 'haspremium'));
-    }
 
+        $user ? ($user->premium === 1 ? $haspremium = true : $haspremium = false) : $haspremium = false;
+        
+        return view('blogs.index', compact('blogs', 'haspremium', 'categories'));
+    }
+    
+    
+    public function premium()
+    {
+
+        $blogs = Blog::where('premium', 1)->orderBy('created_at', 'desc')->get();
+        $user = Auth::user();
+        $categories = Category::all();
+
+        if(!$user) {
+            return redirect()->route('error.401');
+        } else if ($user->premium === 0) {
+            return redirect()->route('error.403');
+        }
+
+        return view('blogs.premium', compact('blogs', 'categories', 'user'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -90,12 +100,11 @@ class BlogController extends Controller
         $blog->body = $request->input('body');
         //$blog->image = $request->input('image');
         $blog->premium = $request->input('premium');
+        $blog->category()->sync($request->input('category_id'));
         $blog->save();
 
-        if ($request->has('category_id')) {
-            $blog->category()->attach($request->input('category_id'));
-        }
-
+        
+        
         return redirect()->route('blogs.blog', $id);
     }
 
@@ -106,6 +115,7 @@ class BlogController extends Controller
     {
         $blog = Blog::find($id);
         $blog->delete();
+        
         return redirect()->route('users.dashboard');
     }
 }

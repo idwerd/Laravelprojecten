@@ -5,8 +5,11 @@
 @section('content')
 
     <main>
+
+        @include('partials.goback')
+
         <h1>Edit: {{ $blog->title }}</h1>
-        <a href="{{ route('users.dashboard') }}">&#8592; Back to dashboard</a>
+
         <form action="{{ route('blogs.update', $blog->id) }}" method="POST">
             @csrf
             <input id="title" name="title" placeholder="Title" value="{{ $blog->title }}"/>
@@ -14,7 +17,7 @@
             <label>Categories</label>
             <select name="category_id[]" id="category_id" multiple required>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" {{ $blog->category->contains($category->id) ? 'selected' : null }}>{{ $category->name }}</option>
                 @endforeach
             </select>
             <label>Premium content</label>

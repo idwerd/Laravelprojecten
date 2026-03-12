@@ -16,7 +16,6 @@ return new class extends Migration
             $table->char('title');
             $table->text('body');
             $table->foreignId('user_id');
-            //$table->foreignId('category_id');
             $table->boolean('premium');
             //$table->('image');
             $table->timestamps();

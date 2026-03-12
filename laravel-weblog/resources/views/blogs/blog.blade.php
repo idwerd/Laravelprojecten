@@ -6,6 +6,8 @@
 
     <main>
 
+        @include('partials.goback')
+
         <section class="blogpost">
             <h1>{{ $blog->title }}</h1>
             
@@ -19,7 +21,7 @@
                 @endforeach
                 
                 
-                <h3>Author</h3>
+                <h3>{{ $blog->user_id }}</h3>
             </div>
 
             @if($blog->image)
@@ -33,11 +35,20 @@
         
         <section class="commentsection">
             
-            <form action="{{ route('comments.store', $blog->id) }}" method="POST">
-                @csrf
-                <textarea name="comment" id="comment" placeholder="Leave a comment!"></textarea>
-                <button type="submit">Post your comment</button>
-            </form>
+            @if(Auth::check())
+                <form action="{{ route('comments.store', $blog->id) }}" method="POST">
+                    @csrf
+                    <textarea name="comment" id="comment" placeholder="Leave a comment!"></textarea>
+                    <button type="submit">Post your comment</button>
+                </form>
+            @else
+                <h3>Login to leave a comment</h3>
+                <form action="{{ route('users.login') }}" method="GET">
+                    @csrf
+                    <button type="submit">Login</button>
+                </form>
+            @endif
+            
 
             <div class="comments">
                 <h2>Comments</h2>
@@ -46,7 +57,7 @@
                 @else
                     @foreach($comments as $comment)
                         <div class="singlecomment">
-                            <p class="username">Username</p>
+                            <p class="username">{{ $comment->user->username }}</p>
                             <p>{{ $comment->body }}</p>
                             <p class="date">{{ $comment->created_at }}</p>
                         </div>
