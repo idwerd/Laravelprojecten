@@ -7,14 +7,18 @@
     <main>
         <h1>Blog overview</h1>
         
-        <label>Filter</label>
-        <select name="category_id[]" class="filter-categories" multiple>
-            @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
-        </select>
+        <div id="filter-dropdown">
+             <label>Filter on category:</label>
+            <select name="filter-categories[]" class="filter-categories" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" href="#">{{ $category->name }}</option>
+                    @endforeach
+            </select>
+        </div>
+       
         
         <section class="blogoverview">
+
             @foreach($blogs as $blog) 
                 @if( $haspremium === false && $blog->premium === 1)
                     @continue

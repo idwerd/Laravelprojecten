@@ -24,7 +24,6 @@ class Blog extends Model
         'title', 
         'body', 
         'image',
-        //'category_id',
         'user_id',
         'premium',
     ];

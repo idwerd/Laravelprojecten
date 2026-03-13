@@ -126,6 +126,9 @@ h3 {
 #delete-dialog {
     background-color: rgb(86, 86, 143);
 }
+.blogtext {
+    margin-top: 50px;
+}
 .blogtext, .commentsection {
     padding-left: 100px;
     padding-right: 100px;
@@ -135,6 +138,11 @@ h3 {
     border-bottom: 1px solid grey;
     margin-bottom: 50px;
     padding-bottom: 50px;
+}
+.blogpost img {
+    width: 100%;
+    margin-top: 10px;
+
 }
 .commentsection {
     width: 70%;
@@ -266,7 +274,6 @@ select {
     justify-content: space-evenly;
     border-bottom: 1px solid grey;
     color: grey;
-    margin-bottom: 50px;
 }
 
 .subscription {
@@ -288,3 +295,9 @@ select {
     background-color: transparent;
     text-decoration: none;
 }
+
+
+.replace-image:hover {
+    opacity: 0.7;
+}
+

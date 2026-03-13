@@ -21,11 +21,11 @@
                 @endforeach
                 
                 
-                <h3>{{ $blog->user_id }}</h3>
+                <h3>{{ $blog->user->username }}</h3>
             </div>
 
             @if($blog->image)
-                <img src="">
+                <img src="{{ asset('storage/public/' . $blog->image) }}" alt="image">
             @endif
 
             <div class="blogtext">

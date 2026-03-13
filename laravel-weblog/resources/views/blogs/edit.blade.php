@@ -10,10 +10,16 @@
 
         <h1>Edit: {{ $blog->title }}</h1>
 
-        <form action="{{ route('blogs.update', $blog->id) }}" method="POST">
+        <form action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input id="title" name="title" placeholder="Title" value="{{ $blog->title }}"/>
-            <input type="file" name="image"/>
+            @if($blog->image)
+                <input type="image" src="{{ asset('storage/public/' . $blog->image) }}" alt="image">
+            @endif
+
+            <label>Replace image</label>
+            <input type="file" name="image" accept="image/*"/>
+            
             <label>Categories</label>
             <select name="category_id[]" id="category_id" multiple required>
                 @foreach($categories as $category)

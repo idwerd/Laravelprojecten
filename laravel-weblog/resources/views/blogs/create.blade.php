@@ -10,12 +10,12 @@
 
         <h1>Create new blog</h1>
 
-        <form action="{{ route('blogs.store') }}" method="POST">
+        <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input id="title" name="title" placeholder="Title"/>
-            <input type="file" name="image"/>
+            <input type="file" name="image" accept="image/*"/>
             <label>Categories</label>
-            <select name="category_id[]" id="category_id" multiple required>
+            <select name="category_id[]" id="category_id" multiple>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach

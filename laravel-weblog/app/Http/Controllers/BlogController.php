@@ -57,14 +57,21 @@ class BlogController extends Controller
         $blog->user_id =  Auth::id();
         $blog->title = $request->input('title');
         $blog->body = $request->input('body');
-        //$blog->image = $request->input('image');
         $blog->premium = $request->input('premium');
+
+        if($request->image) {
+            $file = $request->file('image');
+            $filename = $file->hashName();
+            $file->storeAs('public', $filename, 'public');
+
+            $blog->image = $filename;
+        }
+        
         $blog->save();
 
         if ($request->has('category_id')) {
             $blog->category()->attach($request->input('category_id'));
         }
-    
 
         return redirect()->route('blogs.index');
     }
@@ -98,13 +105,21 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $blog->title = $request->input('title');
         $blog->body = $request->input('body');
-        //$blog->image = $request->input('image');
         $blog->premium = $request->input('premium');
         $blog->category()->sync($request->input('category_id'));
+
+        //dd($request->file('image'));
+        
+        if($request->image) {
+            $file = $request->file('image');
+            $filename = $file->hashName();
+            $file->storeAs('public', $filename, 'public');
+
+            $blog->image = $filename;
+        }
+        
         $blog->save();
 
-        
-        
         return redirect()->route('blogs.blog', $id);
     }
 
