@@ -15,11 +15,17 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
         $category = new Category();
         $category->name = $request->input('new-category');
         $category->save();
 
         return redirect()->route('categories.index');
+    }
+
+    public function filter(Request $request) 
+    {
+        $filter_category = $request->input('filter-categories');
+        //dd($filter_category);
+        return redirect()->route('blogs.index')->with('filter_category', $filter_category);
     }
 }

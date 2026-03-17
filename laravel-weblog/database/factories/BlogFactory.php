@@ -24,6 +24,7 @@ class BlogFactory extends Factory
             'image' => 'afbeelding.jpg',
             'user_id' => User::inRandomOrder()->first()->id,
             'premium' => $this->faker->boolean(),
+            
         ];
     }
 }

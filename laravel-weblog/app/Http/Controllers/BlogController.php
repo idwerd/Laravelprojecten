@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
 
@@ -14,21 +15,22 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
-        $categories = Category::all();
         $user = Auth::user();
 
-        $user ? ($user->premium === 1 ? $haspremium = true : $haspremium = false) : $haspremium = false;
+        !$user || $user->premium === 0 ? $blogs = Blog::where('premium', '0')->orderBy('created_at', 'desc')->get() : $blogs = Blog::orderBy('created_at', 'desc')->get();
+    
+        $categories = Category::all();
         
-        return view('blogs.index', compact('blogs', 'haspremium', 'categories'));
+        return view('blogs.index', compact('blogs', 'categories'));
     }
     
     
     public function premium()
     {
+        $user = Auth::user();
 
         $blogs = Blog::where('premium', 1)->orderBy('created_at', 'desc')->get();
-        $user = Auth::user();
+        
         $categories = Category::all();
 
         if(!$user) {
@@ -51,14 +53,20 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
+        // TODO :: toevoegen validatie && Mass-assignment
+        $validated = $request->validated();
+        $blog = Blog::create($validated);
+        $blog->user_id = Auth::id();
+        /*
         $blog = new Blog();
         $blog->user_id =  Auth::id();
-        $blog->title = $request->input('title');
-        $blog->body = $request->input('body');
-        $blog->premium = $request->input('premium');
-
+        $blog->title = $validated['title'];
+        $blog->body = $validated['body'];
+        $blog->premium = $validated['premium'];
+        */
+        /*
         if($request->image) {
             $file = $request->file('image');
             $filename = $file->hashName();
@@ -66,33 +74,32 @@ class BlogController extends Controller
 
             $blog->image = $filename;
         }
-        
+        */
         $blog->save();
-
+        
         if ($request->has('category_id')) {
             $blog->category()->attach($request->input('category_id'));
         }
-
+        
         return redirect()->route('blogs.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(Blog $blog)
     {
-        $blog = Blog::find($id);
-        $blog->load('category');
-        $comments = app(CommentController::class)->show($id);
-        return view('blogs.blog', compact('blog', 'comments',));
+        $blog->load('category', 'comments');
+        // TODO
+        $comments = app(CommentController::class)->show($blog->id);
+        return view('blogs.blog', compact('blog', 'comments'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        $blog = Blog::find($id);
         $categories = Category::all();
         return view('blogs.edit', compact('blog', 'categories'));
     }
@@ -100,15 +107,13 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Blog $blog)
     {
-        $blog = Blog::find($id);
+        // TODO :: toevoegen validatie && Mass-assignment
         $blog->title = $request->input('title');
         $blog->body = $request->input('body');
         $blog->premium = $request->input('premium');
         $blog->category()->sync($request->input('category_id'));
-
-        //dd($request->file('image'));
         
         if($request->image) {
             $file = $request->file('image');
@@ -120,17 +125,15 @@ class BlogController extends Controller
         
         $blog->save();
 
-        return redirect()->route('blogs.blog', $id);
+        return redirect()->route('blogs.blog', $blog);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        $blog = Blog::find($id);
-        $blog->delete();
-        
+        $blog->delete();   
         return redirect()->route('users.dashboard');
     }
 }

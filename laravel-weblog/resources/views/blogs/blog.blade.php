@@ -20,7 +20,6 @@
                     </div>
                 @endforeach
                 
-                
                 <h3>{{ $blog->user->username }}</h3>
             </div>
 

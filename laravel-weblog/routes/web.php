@@ -10,17 +10,18 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/premium', [BlogController::class, 'premium'])->name('blogs.premium');
-Route::get('/blogs/blog/{id}', [BlogController::class, 'show'])->name('blogs.blog');
+Route::get('/blogs/blog/{blog}', [BlogController::class, 'show'])->name('blogs.blog');
 Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
-Route::post('/blogs/delete/{id}', [BlogController::class, 'destroy'])->name('blogs.delete');
-Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
+Route::get('/blogs/edit/{blog}', [BlogController::class, 'edit'])->name('blogs.edit');
+Route::post('/blogs/delete/{blog}', [BlogController::class, 'destroy'])->name('blogs.delete');
+Route::post('/blogs/update/{blog}', [BlogController::class, 'update'])->name('blogs.update');
 Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
 
 Route::get('/blogs/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::post('/blogs/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::post('/blogs/filter', [CategoryController::class, 'filter'])->name('categories.filter');
 
-Route::post('/blogs/blog/{id}', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/blogs/blog/{blog}', [CommentController::class, 'store'])->name('comments.store');
 
 Route::get('/users/login', [LoginController::class, 'login'])->name('users.login');
 Route::get('users/logout', [LoginController::class, 'logout'])->name('users.logout');

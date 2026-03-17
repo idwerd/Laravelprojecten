@@ -13,9 +13,15 @@ class Blog extends Model
     public function category(): BelongsToMany {
         return $this->belongsToMany(Category::class);
     }
+
     public function blogs() {
         return $this->hasMany(Blog::class);
     }
+    
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }
@@ -23,8 +29,7 @@ class Blog extends Model
     protected $fillable = [
         'title', 
         'body', 
-        'image',
-        'user_id',
+       // 'user_id',
         'premium',
     ];
 }

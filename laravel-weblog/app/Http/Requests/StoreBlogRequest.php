@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreBlogRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreBlogRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,8 @@ class StoreBlogRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'body' => 'nullable',
-            'category_id' => 'required|exists:categories,id',
+            'body' => 'required',
+            'premium' => 'required',
         ];
     }
 }
