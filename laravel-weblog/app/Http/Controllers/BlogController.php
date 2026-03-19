@@ -53,22 +53,15 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
         // TODO :: toevoegen validatie && Mass-assignment
-        //$validated = $request->validated();
-        //$blog = Blog::create($validated);
-        //$blog->user_id = Auth::id();
+        $validated = $request->validated();
+        $validated['user_id'] = Auth::id();
+        $blog = Blog::create($validated);
         
-        $blog = new Blog();
-        $blog->user_id =  Auth::id();
-        $blog->title = $request->input('title');
-        $blog->body = $request->input('body');
-        $blog->premium = $request->input('premium');
-        
-        //dd($request);
         if($request->image) {
-            $file = $request->file('image');
+            $file = $validated['image']('image');
             $filename = $file->hashName();
             $file->storeAs('public', $filename, 'public');
 
@@ -78,7 +71,7 @@ class BlogController extends Controller
         $blog->save();
         
         if ($request->has('category_id')) {
-            $blog->category()->attach($request->input('category_id'));
+            $blog->category()->attach($validated['category_id']);
         }
         
         return redirect()->route('blogs.index');
@@ -89,8 +82,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $blog->load('category', 'comments');
-        // TODO
+        $blog->load('category');
         $comments = app(CommentController::class)->show($blog->id);
         return view('blogs.blog', compact('blog', 'comments'));
     }

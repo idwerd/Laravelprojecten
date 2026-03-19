@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreBlogRequest extends FormRequest
+class UpdateBlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,7 @@ class StoreBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255',
-            'body' => 'required',
-            'premium' => 'required',
-            'image' => 'nullable|image',
-            'user_id'=> '',
-            'category_id' => 'nullable',
+            //
         ];
     }
 }
