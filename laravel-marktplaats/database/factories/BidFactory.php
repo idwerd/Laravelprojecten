@@ -22,7 +22,7 @@ class BidFactory extends Factory
         return [
             'advert_id' => Advert::inRandomOrder()->first()->id,
             'user_id' => User::inRandomOrder()->first()->id,
-            'price' => $this->faker->randomFloat(2, 0, 1000),
+            'price' => $this->faker->randomFloat(2, 0, 150),
         ];
     }
 }

@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Advert;
 
-class AdvertController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {   
-        $adverts = Advert::all();
-        return view('adverts.index', compact('adverts'));
+        $adverts = Advert::where('user_id', Auth::id())->get();
+        return view('account.dashboard', compact('adverts'));
     }
 
     /**
@@ -21,7 +22,7 @@ class AdvertController extends Controller
      */
     public function create()
     {
-        return view('adverts.create');
+        //
     }
 
     /**
@@ -35,7 +36,7 @@ class AdvertController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Advert $advert)
+    public function show(string $id)
     {
         //
     }
@@ -43,15 +44,15 @@ class AdvertController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Advert $advert)
+    public function edit(string $id)
     {
-        return view('adverts.edit', compact('advert'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Advert $advert)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,7 +60,7 @@ class AdvertController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Advert $advert)
+    public function destroy(string $id)
     {
         //
     }

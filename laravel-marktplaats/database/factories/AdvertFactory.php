@@ -24,8 +24,8 @@ class AdvertFactory extends Factory
             'category_id' => Category::inRandomOrder()->first()->id,
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->text(250),
-            'price' => $this->faker->randomFloat(2, 0, 1000),
-            'image' => '',
+            'price' => $this->faker->randomFloat(2, 0, 100),
+            'image' => 'default.jpg',
             'promote' => $this->faker->boolean(),
         ];
     }
