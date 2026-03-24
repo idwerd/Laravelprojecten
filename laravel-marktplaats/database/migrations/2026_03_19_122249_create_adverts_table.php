@@ -18,8 +18,8 @@ return new class extends Migration
             $table->char('title');
             $table->text('description');
             $table->float('price');
-            $table->string('image');
-            $table->boolean('promote');
+            $table->string('image')->nullable();
+            $table->boolean('promote')->nullable();
             $table->timestamps();
         });
     }

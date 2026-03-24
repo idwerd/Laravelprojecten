@@ -12,8 +12,8 @@
         @endguest
 
         @auth
-            <li><a class="secondary-btn" href="{{ route('account.dashboard') }}">dashboard</a></li>
-            <li><a class="secondary-btn" href="{{ route('account.logout') }}">Logout</a></li>
+            <li><a class="secondary-btn" href="{{ route('account.dashboard') }}">Dashboard</a></li>
+            <li><a class="secondary-btn" href="{{ route('account.logout') }}">Uitloggen</a></li>
         @endauth
     </ul>
             

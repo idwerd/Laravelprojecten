@@ -27,9 +27,7 @@
                     @endforeach
                     <button type="submit">Filter</button>
             </select>
-            
         </form>
-       
         
         <section class="blogoverview">
 

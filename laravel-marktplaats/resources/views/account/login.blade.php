@@ -12,7 +12,7 @@
         <form action="{{ route('account.auth') }}" id="login-form" class="form" method="POST">
             @csrf
             
-            <input name="email" id="email" type="text" placeholder="jan@example.com">
+            <input name="email" id="email" type="email" placeholder="jan@example.com">
             <label for="email">E-mailadres</label>
             @error('email')
                 <span class="invalid-feedback" role="alert">

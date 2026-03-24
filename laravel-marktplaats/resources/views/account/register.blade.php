@@ -15,7 +15,7 @@
             <input type="text" id="name" name="name" placeholder="Jan">
             <label for="name">Naam</label>
 
-            <input type="text" id="email" name="email" placeholder="jan@example.com">
+            <input type="email" id="email" name="email" placeholder="jan@example.com">
             <label>E-mailadres</label>
 
             <input type="password" id="password" name="password" placeholder="wachtwoord">

@@ -22,4 +22,13 @@ class Advert extends Model
         return $this->hasMany(Bid::class);
     }
 
+    protected $fillable = [
+        'user_id',
+        'category_id',
+        'title', 
+        'description', 
+        'price',
+        //'image',
+        //'promote',
+    ];
 }
