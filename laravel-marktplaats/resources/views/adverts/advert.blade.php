@@ -23,6 +23,7 @@
             <ul>
                 <li>{{ $advert->user->name }}</li>
                 <li>{{ $advert->created_at }}</li>
+                <li>€{{ $advert->price }}</li>
             </ul>
         </div>
 
@@ -57,9 +58,10 @@
                 </div>
             </div>
         </div>
-        </div>
 
-        <div>
+        <div class="advert-message">
+            <h2>Stuur een bericht</h2>
+        </div>
 
 
         </div>

@@ -82,7 +82,8 @@ header {
 }
 
 main {
-    width: 1500px;
+    width: 100%;
+    max-width: 1500px;
     margin-left: auto;
     margin-right: auto;
 
@@ -266,7 +267,7 @@ h3 {
     padding: 20px;
     border: 1px solid #ccc;
 }
-.bid-form {
+.bid-form, .delete-advert {
     background-color: var(--primary-bg-color);
     width: 500px;
     margin: auto;

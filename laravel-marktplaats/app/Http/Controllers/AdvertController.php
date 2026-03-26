@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FilterAdvertRequest;
 use App\Http\Requests\StoreAdvertRequest;
 use App\Http\Requests\UpdateAdvertRequest;
 use Illuminate\Support\Facades\Auth;
@@ -17,17 +18,24 @@ class AdvertController extends Controller
      */
     public function index()
     {   
-        $adverts = Advert::orderBy('created_at', 'desc')->get();
+        $adverts = Advert::orderBy('created_at', 'desc')->get(); 
         $categories = Category::all();
         return view('adverts.index', compact('adverts', 'categories'));
     }
 
-    public function filter(Request $request) 
+    
+    public function filter(FilterAdvertRequest $request) 
     {
-        //TODO:: validatie van request?
-        $filter_category = $request->input('filter-categories');
-        //dd($filter_category);
-        return redirect()->route('adverts.index')->with('filter_category', $filter_category);
+       // dd($request);
+        $validated = $request->validated();
+        $filter_category = $validated['filter-category'];
+
+        $all_adverts = Advert::orderBy('created_at', 'desc')->get();
+
+        $filter_category === '0' ? $adverts = $all_adverts : $adverts = $all_adverts->where('category_id', $filter_category);
+        $categories = Category::all();
+
+        return view('adverts.index', compact('adverts', 'categories', 'filter_category'));
     }
     /**
      * Show the form for creating a new resource.
@@ -119,7 +127,8 @@ class AdvertController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Advert $advert)
-    {
+    {   
+        Bid::where('advert_id', $advert->id)->delete();
         $advert->delete();
         return redirect()->route('account.dashboard');
     }

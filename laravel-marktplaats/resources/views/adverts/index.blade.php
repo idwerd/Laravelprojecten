@@ -8,19 +8,33 @@
     </header>
 
     <main>
-        <form action="{{ route('adverts.filter') }}" method="POST">
-            @csrf
-            <select name="filter-category">
-                <option value="" selected disabled hidden>Selecteer een categorie</option>
-                
-                @foreach($categories as $category)
-                    <option name="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-                
-            </select>
-            <button class="secondary-btn" type="submit">Filter</button>
-            
-        </form>
+        <div>
+            <form action="{{ route('adverts.filter') }}" method="POST">
+                @csrf
+                <select name="filter-category">
+                    <option value="0">Alles bekijken</option>
+                    
+                    @foreach($categories as $category)
+                        <option name="{{ $category->id }}" value="{{ $category->id }}"
+                            @if(isset($filter_category))
+                                {{ $category->id == $filter_category ? 'selected' : null }}
+                            @endif
+                        >{{ $category->name }}</option>
+                    @endforeach
+                    
+                </select>
+                <button class="secondary-btn" type="submit">Filter</button>
+            </form>
+
+            <form method="POST">
+                @csrf
+                <input placeholder="Zoeken...">
+                <button class="secondary-btn" type="submit">Zoeken</button>
+
+            </form>
+
+        </div>
+        
         
         @foreach($adverts as $advert)
 
