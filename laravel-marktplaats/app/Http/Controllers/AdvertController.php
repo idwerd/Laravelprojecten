@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FilterAdvertRequest;
 use App\Http\Requests\StoreAdvertRequest;
 use App\Http\Requests\UpdateAdvertRequest;
+use App\Http\Requests\SearchAdvertRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\Models\Advert;
 use App\Models\Bid;
 use App\Models\Category;
+use App\Helpers\AdvertHelper;
 
 class AdvertController extends Controller
 {
@@ -18,25 +21,46 @@ class AdvertController extends Controller
      */
     public function index()
     {   
-        $adverts = Advert::orderBy('created_at', 'desc')->get(); 
+        $adverts = Advert::all(); 
+        $sortedAdverts = AdvertHelper::sortAdverts($adverts);
+        $paginatedAdverts = AdvertHelper::paginateAdverts($sortedAdverts, 5);
+        
         $categories = Category::all();
-        return view('adverts.index', compact('adverts', 'categories'));
+
+        return view('adverts.index', compact('paginatedAdverts', 'categories'));
     }
 
     
     public function filter(FilterAdvertRequest $request) 
     {
-       // dd($request);
         $validated = $request->validated();
         $filter_category = $validated['filter-category'];
 
-        $all_adverts = Advert::orderBy('created_at', 'desc')->get();
+        $all_adverts = Advert::all();
 
         $filter_category === '0' ? $adverts = $all_adverts : $adverts = $all_adverts->where('category_id', $filter_category);
         $categories = Category::all();
 
-        return view('adverts.index', compact('adverts', 'categories', 'filter_category'));
+        $sortedAdverts = AdvertHelper::sortAdverts($adverts);
+        $paginatedAdverts = AdvertHelper::paginateAdverts($sortedAdverts, 5);
+
+        return view('adverts.index', compact('paginatedAdverts', 'categories', 'filter_category'));
     }
+
+    public function search(SearchAdvertRequest $request)
+    {
+        $validated = $request->validated();
+        $prompt = $validated['search'];
+
+        $adverts = Advert::whereAny(['title', 'description'], 'LIKE', '%' . $prompt . '%')->orderBy('promote', 'desc')->get();
+        $categories = Category::all();
+
+        $sortedAdverts = AdvertHelper::sortAdverts($adverts);
+        $paginatedAdverts = AdvertHelper::paginateAdverts($sortedAdverts, 5);
+        return view('adverts.index', compact('paginatedAdverts', 'categories'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -121,6 +145,13 @@ class AdvertController extends Controller
         $advert->save();
 
         return redirect()->route('adverts.advert', compact('advert'));
+    }
+
+    public function promote(Advert $advert) 
+    {
+        $advert->promote = 1;
+        $advert->save();
+        return redirect()->route('adverts.index');
     }
 
     /**

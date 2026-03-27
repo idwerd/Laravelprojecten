@@ -10,7 +10,7 @@
     </header>
 
     <main>
-        <form action="" class="form" method="POST">
+        <form action="{{ route('register.auth') }}" class="form" method="POST">
             @csrf
             <input type="text" id="name" name="name" placeholder="Jan">
             <label for="name">Naam</label>

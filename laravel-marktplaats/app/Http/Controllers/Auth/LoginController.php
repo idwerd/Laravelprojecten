@@ -1,19 +1,18 @@
 <?php
-/*
-namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
-
     public function authenticate(LoginRequest $request): RedirectResponse 
     {
-        
+
         $credentials = $request->validated();
  
         if (Auth::attempt($credentials)) {
@@ -27,9 +26,5 @@ class AuthController extends Controller
             'password' => 'Het opgegeven wachtwoord is incorrect'
         ])->onlyInput('email');
 
-
     }
-
-    
 }
-*/

@@ -33,8 +33,9 @@
                 <p><strong>{{ $bid->user->name }}</strong> biedt <strong>€{{ $bid->price }}</strong>
             @endforeach
 
-            <a href="#place-bid" class="primary-btn">Bieden</a>
-
+            @if($advert->user_id != Auth::id())
+                <a href="#place-bid" class="primary-btn">Bieden</a>
+            @endif
             <div id="place-bid" class="dialog">
                 
                 <div class="bid-form">
