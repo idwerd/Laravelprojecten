@@ -61,7 +61,13 @@
         </div>
 
         <div class="advert-message">
-            <h2>Stuur een bericht</h2>
+            <h2>Contacteer de verkoper</h2>
+            <form action="{{ route('conversation.store', $advert->id) }}" method="POST">
+                @csrf
+                <textarea name="body">
+                </textarea>
+                <button type="submit" class="primary-btn">Stuur een bericht</button>
+            </form>
         </div>
 
 

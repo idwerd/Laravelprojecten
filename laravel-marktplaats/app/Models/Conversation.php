@@ -17,9 +17,19 @@ class Conversation extends Model
 
     }
 
-    public function users() {
+    public function advert() {
 
-        return $this->manyToMany(User::class);
+        return $this->belongsTo(Advert::class);
 
     }
+    
+    public function users() {
+
+        return $this->belongsToMany(User::class);
+
+    }
+
+    protected $fillable = [
+        'advert_id',
+    ];
 }

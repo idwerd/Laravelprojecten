@@ -34,17 +34,17 @@ class AdvertController extends Controller
     public function filter(FilterAdvertRequest $request) 
     {
         $validated = $request->validated();
-        $filter_category = $validated['filter-category'];
+        $category_id = $validated['category_id'];
 
         $all_adverts = Advert::all();
 
-        $filter_category === '0' ? $adverts = $all_adverts : $adverts = $all_adverts->where('category_id', $filter_category);
+        $category_id === '0' ? $adverts = $all_adverts : $adverts = $all_adverts->where('category_id', $category_id);
         $categories = Category::all();
 
         $sortedAdverts = AdvertHelper::sortAdverts($adverts);
         $paginatedAdverts = AdvertHelper::paginateAdverts($sortedAdverts, 5);
 
-        return view('adverts.index', compact('paginatedAdverts', 'categories', 'filter_category'));
+        return view('adverts.index', compact('paginatedAdverts', 'categories', 'category_id'));
     }
 
     public function search(SearchAdvertRequest $request)

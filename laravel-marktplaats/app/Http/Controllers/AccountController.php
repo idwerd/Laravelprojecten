@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Advert;
+use App\Models\Conversation;
 use Illuminate\Http\RedirectResponse;
 
 class AccountController extends Controller
@@ -14,23 +15,13 @@ class AccountController extends Controller
      */
     public function index()
     {   
-        $adverts = Advert::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         $user = Auth::user();
-        return view('account.dashboard', compact('adverts', 'user'));
+        $adverts = Advert::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $conversations = Conversation::where('user_id', Auth::id());
+
+        return view('account.dashboard', compact('adverts', 'user', 'conversations'));
     }
 
-    /*
-    public function login()
-    {
-        return view('account.login');
-    }
-    */
-    /*
-    public function register()
-    {
-        return view('account.register');
-    }
-    */
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

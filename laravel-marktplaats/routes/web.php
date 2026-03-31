@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdvertController;
+use App\Http\Controllers\ConversationController;
 
 
 
@@ -24,13 +25,13 @@ Route::post('/adverts/create', [AdvertController::class, 'store'])
 ->name('adverts.store');
 Route::post('/adverts/edit/{advert}', [AdvertController::class, 'update'])
 ->name('adverts.update');
-Route::post('/adverts/filter', [AdvertController::class, 'filter'])
+Route::get('/adverts/filter', [AdvertController::class, 'filter'])
 ->name('adverts.filter');
 Route::post('adverts/advert/bid/{advert}', [AdvertController::class, 'bid'])
 ->name('adverts.bid');
 Route::post('/adverts/promote/{advert}', [AdvertController::class, 'promote'])
 ->name('adverts.promote');
-Route::post('/adverts/search', [AdvertController::class, 'search'])
+Route::get('/adverts/search', [AdvertController::class, 'search'])
 ->name('adverts.search');
 
 Route::view('/account/login', 'account.login')
@@ -51,6 +52,8 @@ Route::get('/account/dashboard', [AccountController::class, 'index'])
 Route::get('/account/logout', [AccountController::class, 'logout'])
 ->name('account.logout');
 
+Route::post('/adverts/advert/message/{advert}', [ConversationController::class, 'store'])
+->name('conversation.store');
 
 
 

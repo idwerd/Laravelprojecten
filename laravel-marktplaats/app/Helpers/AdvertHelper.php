@@ -21,7 +21,7 @@ class AdvertHelper
         $currentPage = request()->input($pageName, 1);
         $paginatedItems = $collection->forPage($currentPage, $perPage);
        
-        return new LengthAwarePaginator(
+        $paginator = new LengthAwarePaginator(
             $paginatedItems,
             $collection->count(),
             $perPage,
@@ -31,5 +31,9 @@ class AdvertHelper
                 'pageName' => $pageName,
             ]
         );
+
+        $paginator->appends(request()->except('page'));
+
+        return $paginator;
     }
 }

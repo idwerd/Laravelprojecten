@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Message;
+use App\Models\Advert;
 use App\Models\User;
 use App\Models\Conversation;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,6 +23,7 @@ class MessageFactory extends Factory
         return [
             'user_id' => User::inRandomOrder()->first()->id,
             'conversation_id' => Conversation::inRandomOrder()->first()->id,
+            'advert_id' => Advert::inRandomOrder()->first()->id,
             'body' => $this->faker->text,
         ];
     }

@@ -10,15 +10,15 @@
     <main id="homepage">
         <div class="search-options">
 
-            <form action="{{ route('adverts.filter') }}" method="POST" class="filter-form">
+            <form action="{{ route('adverts.filter') }}" method="GET" class="filter-form">
                 @csrf
-                <select name="filter-category">
+                <select name="category_id">
                     <option value="0">Alles bekijken</option>
                     
                     @foreach($categories as $category)
                         <option name="{{ $category->id }}" value="{{ $category->id }}"
-                            @if(isset($filter_category))
-                                {{ $category->id == $filter_category ? 'selected' : null }}
+                            @if(isset($category_id))
+                                {{ $category->id == $category_id ? 'selected' : null }}
                             @endif
                         >{{ $category->name }}</option>
                     @endforeach
@@ -27,7 +27,7 @@
                 <button class="secondary-btn" type="submit">Filter</button>
             </form>
 
-            <form action="{{ route('adverts.search') }}" method="POST" class="search-form">
+            <form action="{{ route('adverts.search') }}" method="GET" class="search-form">
                 @csrf
                 <input name="search" placeholder="Zoeken...">
                 <button class="secondary-btn" type="submit">Zoeken</button>

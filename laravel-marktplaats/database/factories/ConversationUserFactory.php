@@ -2,14 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Model;
+use App\Models\User;
 use App\Models\Conversation;
-use App\Models\Advert;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Conversation>
+ * @extends Factory<Model>
  */
-class ConversationFactory extends Factory
+class ConversationUserFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +20,8 @@ class ConversationFactory extends Factory
     public function definition(): array
     {
         return [
-            'advert_id' => Advert::inRandomOrder()->first()->id,
+            'conversation_id' => Conversation::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }

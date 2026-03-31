@@ -21,5 +21,10 @@ class Message extends Model
         return $this->belongsTo(Conversation::class);
     }
 
+    protected $fillable = [
+        'user_id',
+        'conversation_id',
+        'body', 
+    ];
 
 }

@@ -18,6 +18,10 @@ class Advert extends Model
         return $this->hasOne(Category::class);
     }
 
+    public function conversations() {
+        return $this->hasMany(Conversation::class);
+    }
+
     public function bids() {
         return $this->hasMany(Bid::class);
     }
@@ -28,7 +32,5 @@ class Advert extends Model
         'title', 
         'description', 
         'price',
-        //'image',
-        //'promote',
     ];
 }

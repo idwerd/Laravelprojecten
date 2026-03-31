@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('conversation_id')->constrained();
+            $table->foreignId('advert_id')->constrained();
             $table->text('body');
             $table->timestamps();
         });
