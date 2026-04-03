@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Nette\Schema\Message;
+//use Nette\Schema\Message;
+use App\Models\Message;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Conversation extends Model

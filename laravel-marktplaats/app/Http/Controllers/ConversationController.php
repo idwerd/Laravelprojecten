@@ -14,19 +14,19 @@ class ConversationController extends Controller
 
     public function store(ConversationRequest $request, Advert $advert) {
 
-        //dd($request);
         $validated = $request->validated();
-        $conversation = Conversation::create();
-        
+        $conversation = Conversation::create([
+            'advert_id' => $advert->id,
+        ]);
         $user1 = Auth::user();
         $user2 = $advert->user;
-
+        
         Message::create([
             'user_id' => $user1->id,
             'conversation_id' => $conversation->id,
             'body' => $validated['body'],
         ]);
-
+        
         $conversation->users()->attach([$user1->id, $user2->id]);
 
         return redirect()->route('account.dashboard');

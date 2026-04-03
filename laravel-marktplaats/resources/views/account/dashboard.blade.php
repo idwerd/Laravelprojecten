@@ -10,6 +10,37 @@
     <main>
         <section class="your-messages">
             <h2>Jouw berichten</h2>
+            <div class="conversation-box">
+                @foreach($conversations as $conversation)
+                    <a class="conversation-preview" href="#open-conversation-{{ $conversation->id }}" >
+                        <img class="thumbnail" src="{{ asset('/storage/public/' . $conversation->advert->image) }}" alt="{{ $conversation->advert->title }}" >
+                        <div class="details">
+                            <h3>{{ $conversation->advert->title }}</h3>
+                            <h4>{{ $conversation->advert->user->name }}</h4>
+                        </div>
+                    </a>
+
+                    <div id="open-conversation-{{ $conversation->id }}" class="conversation-select">
+                        @foreach($conversation->messages as $message)
+                        <div class="message-box {{ $message->user_id === $user->id ? 'you' : '' }}">
+                            <p class="message">{{ $message->body }}</p>
+                            <p class="message-details">{{ $message->user->name }}</p>
+                        </div>
+                        @endforeach
+
+                        <form action="{{ route('message.store', $conversation->id) }}" method="POST">
+                            @csrf
+                            <textarea></textarea>
+                            <button type="submit"></button>
+                        </form>
+                        
+                    </div>
+
+
+                @endforeach
+            </div>
+                
+            
         </section>
 
         <section class="your-adverts">

@@ -19,7 +19,7 @@
         </div>
 
         <div class="advert-data">
-            <h2>Door</h2>
+            <h2>Details</h2>
             <ul>
                 <li>{{ $advert->user->name }}</li>
                 <li>{{ $advert->created_at }}</li>
@@ -60,15 +60,17 @@
             </div>
         </div>
 
-        <div class="advert-message">
-            <h2>Contacteer de verkoper</h2>
-            <form action="{{ route('conversation.store', $advert->id) }}" method="POST">
-                @csrf
-                <textarea name="body">
-                </textarea>
-                <button type="submit" class="primary-btn">Stuur een bericht</button>
-            </form>
-        </div>
+        @auth
+            <div class="advert-message">
+                <h2>Contacteer de verkoper</h2>
+                <form action="{{ route('conversation.store', $advert->id) }}" method="POST">
+                    @csrf
+                    <textarea name="body">
+                    </textarea>
+                    <button type="submit" class="primary-btn">Stuur een bericht</button>
+                </form>
+            </div>
+        @endauth
 
 
         </div>

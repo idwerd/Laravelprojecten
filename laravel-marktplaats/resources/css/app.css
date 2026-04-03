@@ -319,3 +319,66 @@ h3 {
 .close-btn svg {
     width: 30px;
 }
+
+/*Messages*/
+.your-messages .conversation-box {
+    background-color: var(--secondary-bg-color);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    border-radius: var(--border-radius);
+    padding: 20px;
+}
+
+.your-messages .conversation-box .conversation-preview {
+    grid-column: 1/2;
+    background-color: var(--secondary-btn-color);
+    border-radius: var(--border-radius);
+    
+
+}
+.your-messages .conversation-box .conversation-preview {
+    display: grid;
+    grid-template-columns: 100px auto;
+    padding: 10px;
+    border-bottom: 1px solid grey;
+    border-radius: var(--border-radius);
+}
+.your-messages .conversation-box .conversation-preview:hover {
+    background-color: var(--secondary-btn-color);
+    
+}
+.your-messages .conversation-box .conversation-select {
+    grid-column: 2/3;
+    
+}
+
+.conversation-select:target {
+    display: block;
+}
+
+.your-messages .conversation-box .conversation-preview .thumbnail {
+    width: 100px;
+    border-radius: var(--border-radius);
+    grid-column: 1/2;
+}
+.your-messages .conversation-box .conversation-preview .details {
+    grid-column: 2/3;
+}
+
+.your-messages .conversation-box .conversation-select .message-box .message {
+    background-color: var(--secondary-btn-color);
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+.your-messages .conversation-box .conversation-select .message-box {
+    margin-bottom: 20px;
+}
+.your-messages .conversation-box .conversation-select .you {
+    margin-right: 0px;
+    margin-left: 20%;
+    text-align: right;
+}

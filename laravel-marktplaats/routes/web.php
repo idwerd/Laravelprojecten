@@ -6,8 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdvertController;
 use App\Http\Controllers\ConversationController;
-
-
+use App\Http\Controllers\MessageController;
 
 Route::get('/', [AdvertController::class, 'index'])
 ->name('adverts.index');
@@ -54,6 +53,9 @@ Route::get('/account/logout', [AccountController::class, 'logout'])
 
 Route::post('/adverts/advert/message/{advert}', [ConversationController::class, 'store'])
 ->name('conversation.store');
+
+Route::post('/account/dashboard/message/{conversation}', [MessageController::class, 'store'])
+->name('message.store');
 
 
 

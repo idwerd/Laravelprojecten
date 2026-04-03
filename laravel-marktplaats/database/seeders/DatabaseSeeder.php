@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             BidSeeder::class,
             ConversationSeeder::class,
             MessageSeeder::class,
+            ConversationUserSeeder::class,
         ]);
     }
 }

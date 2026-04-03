@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Advert;
+use App\Models\Message;
 use App\Models\Conversation;
 use Illuminate\Http\RedirectResponse;
 
@@ -17,8 +18,9 @@ class AccountController extends Controller
     {   
         $user = Auth::user();
         $adverts = Advert::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
-        $conversations = Conversation::where('user_id', Auth::id());
 
+        $conversations = $user->conversations()->with('messages')->get();
+    
         return view('account.dashboard', compact('adverts', 'user', 'conversations'));
     }
 
