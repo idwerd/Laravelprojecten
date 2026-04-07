@@ -18,6 +18,7 @@ class ConversationController extends Controller
         $conversation = Conversation::create([
             'advert_id' => $advert->id,
         ]);
+        
         $user1 = Auth::user();
         $user2 = $advert->user;
         

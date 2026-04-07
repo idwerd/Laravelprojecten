@@ -61,6 +61,7 @@
         </div>
 
         @auth
+            @if($advert->user_id != Auth::id())
             <div class="advert-message">
                 <h2>Contacteer de verkoper</h2>
                 <form action="{{ route('conversation.store', $advert->id) }}" method="POST">
@@ -70,6 +71,7 @@
                     <button type="submit" class="primary-btn">Stuur een bericht</button>
                 </form>
             </div>
+            @endif
         @endauth
 
 

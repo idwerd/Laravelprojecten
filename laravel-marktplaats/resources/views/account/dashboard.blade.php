@@ -21,17 +21,19 @@
                     </a>
 
                     <div id="open-conversation-{{ $conversation->id }}" class="conversation-select">
-                        @foreach($conversation->messages as $message)
-                        <div class="message-box {{ $message->user_id === $user->id ? 'you' : '' }}">
-                            <p class="message">{{ $message->body }}</p>
-                            <p class="message-details">{{ $message->user->name }}</p>
+                        <div class="messages">
+                            @foreach($conversation->messages->where('conversation_id', $conversation->id) as $message)
+                                <div class="message-box {{ $message->user_id === $user->id ? 'you' : '' }}">
+                                    <p class="message">{{ $message->body }}</p>
+                                    <p class="message-details">{{ $message->user->name }}</p>
+                                </div>
+                            @endforeach
                         </div>
-                        @endforeach
 
                         <form action="{{ route('message.store', $conversation->id) }}" method="POST">
                             @csrf
-                            <textarea></textarea>
-                            <button type="submit"></button>
+                            <textarea name="body"></textarea>
+                            <button class="primary-btn" type="submit">Verstuur</button>
                         </form>
                         
                     </div>

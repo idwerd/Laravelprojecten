@@ -251,20 +251,19 @@ h3 {
 
 /*ADVERT*/
 #advert {
-    
     display: grid;
     grid-template-columns: 80% 20%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: auto auto auto;
     grid-gap: 20px;
 }
-#advert .advert-info, #advert .advert-data, #advert .advert-bids {
+#advert .advert-info, #advert .advert-data, #advert .advert-bids, #advert .advert-message {
     background-color: var(--secondary-bg-color);
     border-radius: var(--border-radius);
     padding: 25px;
 }
 #advert .advert-info {
     grid-column: 1/2;
-    grid-row: 1/3;
+    grid-row: 1/4;
 
     display: grid;
     grid-template-columns: 50% 50%;
@@ -285,6 +284,18 @@ h3 {
     text-align: center;
 
 }
+#advert .advert-message {
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+#advert .advert-message textarea {
+    background-color: var(--primary-bg-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+}
+
 /*BIDS*/
 .dialog {
     width: 100%;
@@ -328,6 +339,7 @@ h3 {
     margin-right: auto;
     display: grid;
     grid-template-columns: 40% 60%;
+    grid-template-rows: auto;
     border-radius: var(--border-radius);
     padding: 20px;
 }
@@ -345,6 +357,7 @@ h3 {
     padding: 10px;
     border-bottom: 1px solid grey;
     border-radius: var(--border-radius);
+    height: 120px;
 }
 .your-messages .conversation-box .conversation-preview:hover {
     background-color: var(--secondary-btn-color);
@@ -354,7 +367,9 @@ h3 {
     grid-column: 2/3;
     
 }
-
+.conversation-select {
+    display: none;
+}
 .conversation-select:target {
     display: block;
 }
@@ -368,17 +383,36 @@ h3 {
     grid-column: 2/3;
 }
 
+.your-messages .conversation-box .conversation-select {
+    grid-row: 1/4;
+}
+
 .your-messages .conversation-box .conversation-select .message-box .message {
     background-color: var(--secondary-btn-color);
     padding: 10px;
     border-radius: 10px;
-    max-width: 80%;
+
 }
 .your-messages .conversation-box .conversation-select .message-box {
     margin-bottom: 20px;
+    width: 80%;
 }
 .your-messages .conversation-box .conversation-select .you {
     margin-right: 0px;
-    margin-left: 20%;
+    margin-left: auto;
     text-align: right;
+}
+.your-messages .conversation-box .conversation-select .messages {
+    height: 500px;
+    overflow-y: scroll;
+}
+.your-messages .conversation-box .conversation-select textarea {
+    background-color: var(--primary-bg-color);
+    border-radius: var(--border-radius);
+    width: 100%;
+    height: 100px;
+}
+.your-messages .conversation-box .conversation-select .primary-btn {
+    margin-right: 0px;
+    margin-left: auto;
 }
