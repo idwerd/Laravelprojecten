@@ -28,7 +28,7 @@
                 </span>
             @enderror
 
-            <a href="">Wachtwoord vergeten</a>
+            <a href="{{ route('account.reset_password')}}">Wachtwoord vergeten</a>
 
             <button type="submit" class="primary-btn">Login</button>
         </form>

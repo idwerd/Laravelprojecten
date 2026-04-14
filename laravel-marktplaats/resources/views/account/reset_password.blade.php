@@ -9,7 +9,7 @@
     </header>
 
     <main>
-        <form action="{{ }}" id="login-form" class="form" method="POST">
+        <form action="" id="login-form" class="form" method="POST">
             @csrf
             
             <input name="email" id="email" type="email" placeholder="jan@example.com">

@@ -50,6 +50,8 @@ Route::get('/account/dashboard', [AccountController::class, 'index'])
 ->name('account.dashboard');
 Route::get('/account/logout', [AccountController::class, 'logout'])
 ->name('account.logout');
+Route::get('/account/reset', [AccountController::class, 'reset_password'])
+->name('account.reset_password');
 
 Route::post('/adverts/advert/message/{advert}', [ConversationController::class, 'store'])
 ->name('conversation.store');

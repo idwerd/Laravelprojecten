@@ -35,5 +35,9 @@ class AccountController extends Controller
         return redirect('/account/login');
     }
 
+    public function reset_password()
+    {
+        return view('account.reset_password');
+    }
     
 }
