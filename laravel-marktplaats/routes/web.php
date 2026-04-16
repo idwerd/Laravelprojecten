@@ -50,8 +50,14 @@ Route::get('/account/dashboard', [AccountController::class, 'index'])
 ->name('account.dashboard');
 Route::get('/account/logout', [AccountController::class, 'logout'])
 ->name('account.logout');
-Route::get('/account/reset', [AccountController::class, 'reset_password'])
+
+Route::view('/account/reset', 'account.reset_password')
+->middleware('guest')
 ->name('account.reset_password');
+Route::get('/account/resetconfirm', [AccountController::class, 'confirm_reset_password'])
+->name('account.confirm_reset_password');
+Route::post('/account/newpassword', [AccountController::class, 'new_password'])
+->name('account.new_password');
 
 Route::post('/adverts/advert/message/{advert}', [ConversationController::class, 'store'])
 ->name('conversation.store');

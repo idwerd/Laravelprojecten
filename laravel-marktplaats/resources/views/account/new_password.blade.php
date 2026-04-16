@@ -5,11 +5,11 @@
 @section('content')
 
     <header>
-        <h1>Wachtwoord resetten</h1>
+        <h1>Stel een nieuw wachtwoord in</h1>
     </header>
 
     <main>
-        <form action="{{ route('account.confirm_reset_password') }}" id="login-form" class="form" method="GET">
+        <form action="" id="login-form" class="form" method="POST">
             @csrf
             
             <input name="email" id="email" type="email" placeholder="jan@example.com">
