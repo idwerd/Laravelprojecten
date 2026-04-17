@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Message;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,13 +23,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            UserSeeder::class,
-            CategorySeeder::class,
-            AdvertSeeder::class,
-            BidSeeder::class,
-            ConversationSeeder::class,
-            MessageSeeder::class,
-            ConversationUserSeeder::class,
+            AuthorSeeder::class,
+            BookSeeder::class,
+            ReviewSeeder::class,
         ]);
     }
 }

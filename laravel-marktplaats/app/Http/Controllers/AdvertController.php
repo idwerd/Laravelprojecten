@@ -57,6 +57,7 @@ class AdvertController extends Controller
 
         $sortedAdverts = AdvertHelper::sortAdverts($adverts);
         $paginatedAdverts = AdvertHelper::paginateAdverts($sortedAdverts, 5);
+        
         return view('adverts.index', compact('paginatedAdverts', 'categories'));
     }
 
