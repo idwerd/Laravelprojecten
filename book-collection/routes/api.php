@@ -16,3 +16,5 @@ Route::delete('/books/{book}', [BookController::class, 'destroy']);
 
 Route::get('/authors', [AuthorController::class, 'index']);
 Route::post('/authors', [AuthorController::class, 'store']);
+Route::put('/authors/{author}', [AuthorController::class, 'update']);
+Route::delete('/authors/{author}', [AuthorController::class, 'destroy']);

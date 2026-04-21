@@ -29,4 +29,14 @@ class AuthorController extends Controller
         $authors = Author::all();
         return AuthorResource::collection($authors);
     }
+
+    public function destroy(Author $author) {
+        
+        if ($author->books()->exists()) {
+            return response()->json(['message' => 'Auteur kan niet worden verwijderd.'], 403);
+        }
+
+        $author->delete();
+        return response()->json(['message' => 'Auteur succesvol verwijderd'], 200);
+    }
 }
