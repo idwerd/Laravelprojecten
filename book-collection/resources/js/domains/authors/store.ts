@@ -3,12 +3,12 @@ import { ref, computed } from 'vue';
 import { deleteRequest } from '../../../services/http';
 import { storeModuleFactory } from '../../../services/store';
 // state
-const authors = ref([]);
 
+/*
 export interface Author {
     name: string;
 }
-
+*/
 const authorStore = storeModuleFactory('authors');
 authorStore.actions.getAll();
 
@@ -31,9 +31,10 @@ export const updateAuthor = async (id, updatedAuthor) => {
 };
 
 export const deleteAuthor = async (id) => {
-    const response = await deleteRequest(`/authors/${id}`);
+   /* const response = await deleteRequest(`/authors/${id}`);
     if (response.data.message === 403) {
         alert(response.data.message);
-    }
+        return false;
+    }*/
     await authorStore.actions.delete(id);
 };

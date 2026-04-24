@@ -3,9 +3,6 @@ import { ref, computed } from 'vue';
 import { getRequest, postRequest, putRequest, deleteRequest } from '../../../services/http';
 import { storeModuleFactory } from '../../../services/store';
 
-// state
-//const books = ref([]);
-
 const bookStore = storeModuleFactory('books');
 bookStore.actions.getAll();
 
