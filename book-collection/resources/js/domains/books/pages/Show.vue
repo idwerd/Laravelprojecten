@@ -34,7 +34,7 @@ const handleSubmit = async (data) => {
 <template>
 
     <div v-if="book">
-        <h1><strong>{{ book.title }}</strong> by {{ author?.name }}</h1>
+        <h1><strong>{{ book.title }}</strong> by {{ author.name }}</h1>
         <p>{{ book.summary }}</p>
     </div>
     
