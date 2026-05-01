@@ -18,7 +18,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <form @submit.prevent="handleSubmit">
         <label>Review:</label>
-        <textarea v-model="form.body" type="text" required ></textarea>
+        <textarea v-model="form.body" type="text" required></textarea>
     
         <button type="submit">Plaatsen</button>
     </form>

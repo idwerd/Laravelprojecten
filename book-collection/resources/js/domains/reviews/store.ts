@@ -9,6 +9,7 @@ reviewStore.actions.getAll();
 // getters
 export const getAllReviews = reviewStore.getters.all;
 export const getReviewById = reviewStore.getters.getById;
+export const getReviewsByBookId = reviewStore.getters.getByBookId;
 
 // actions
 export const fetchReviews = async () => {
