@@ -10,5 +10,7 @@
 
         <label>Wachtwoord</label>
         <input type="password">
+
+        <button type="submit">Inloggen</button>
     </form>
 </template>

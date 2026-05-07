@@ -54,7 +54,8 @@ const handleSubmit = async (data) => {
     
     
     <ReviewForm v-if="review" :review="review" @submit="handleSubmit" />
-    <ul v-if="reviews.length > 0">
+    
+    <ul>
         <li v-for="review in reviews" :key="review.id">
             {{ review.body }}
         </li>

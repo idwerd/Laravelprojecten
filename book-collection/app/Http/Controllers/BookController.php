@@ -38,6 +38,7 @@ class BookController extends Controller
     }
 
     public function show(Book $book) {
+        $book->load('reviews');
         return new BookResource($book);
     }
 }

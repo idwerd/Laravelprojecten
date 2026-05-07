@@ -5,6 +5,7 @@ import { storeModuleFactory } from '../../../services/store';
 
 const bookStore = storeModuleFactory('books');
 bookStore.actions.getAll();
+const reviews = ref([]);
 
 // getters
 export const getAllBooks = bookStore.getters.all;

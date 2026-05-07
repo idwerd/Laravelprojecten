@@ -1,7 +1,8 @@
-<script>
-</script>
+<script setup></script>
 
 <template>
-
-    <h1>Hallo</h1>
+    <nav>
+        <router-link :to="{name: 'auth.login'}">Inloggen</router-link>
+    </nav>
+    <router-view></router-view>
 </template>

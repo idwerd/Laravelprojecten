@@ -19,6 +19,8 @@ class BookResource extends JsonResource
             'title' => $this->title,
             'summary' => $this->summary,
             'author_id' => $this->author_id,
+
+            'reviews' => ReviewResource::collection($this->whenLoaded('reviews')),
         ];
     }
 }
